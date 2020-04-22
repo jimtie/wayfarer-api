@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Post = require('./Post');
 
 
-const CitySchema = new.mongoose.Schema({
+const CitySchema = mongoose.Schema({
   name: String,
   description: String,
   image: String,

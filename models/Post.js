@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const PostSchema = new mongoose.Schema({
+const PostSchema = mongoose.Schema({
   title: String,
   content: String
   }

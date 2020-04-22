@@ -5,7 +5,7 @@ const City = require('./City');
 // Building User Schema
 //NOTE: city embedded in user schema model
 
-const UserSchema = new.mongoose.Schema({
+const UserSchema = mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Please provide a name.']
@@ -22,6 +22,6 @@ const UserSchema = new.mongoose.Schema({
   city: [City.schema]
 });
 
-const User = mongoose.moeld('User', UserSchema)
+const User = mongoose.model('User', UserSchema)
 
 model.exports = User
