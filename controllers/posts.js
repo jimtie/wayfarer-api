@@ -1,7 +1,12 @@
 const db = require('../models');
 
+// INDEX City
+const index = (req, res) => {
+  res.sendStatus(200);
+}
+
 //Show City
-const showCityPost = (req,res) => {
+const show = (req,res) => {
   db.City.findById(req.params.cityId, (err,foundCity) => {
     if (err) {
       return res.status(400).json({status:400, error: 'Something went wrong, please try again'})
@@ -17,7 +22,7 @@ const showCityPost = (req,res) => {
 }
 
 //Create Comment
-const createCityPost = (req, res) => {
+const create = (req, res) => {
   console.log(req.body)
   // Create Post
   db.Post.create(req.body, (err, newPost) => {
@@ -47,7 +52,7 @@ const createCityPost = (req, res) => {
 };
 
 //Updating Comment
-const updateItem = (req,res) => {
+const update = (req,res) => {
   //find city by Id
   db.City.findById(req.params.cityId, (err,foundCity) => {
     if (err){
@@ -79,7 +84,7 @@ const updateItem = (req,res) => {
 };
 
 //Delete Comment
-const destroyCityPost = (req, res) => {
+const deletePost = (req, res) => {
   // Find City By ID
   db.City.findById(req.params.cityId, (err, foundCity) => {
     if (err) {
@@ -115,8 +120,9 @@ const destroyCityPost = (req, res) => {
 };
 
 module.exports = {
-showCityPost,
-createCityPost,
-updateItem,
-destroyCityPost,
+  index,
+  show,
+  create,
+  update,
+  deletePost,
 }

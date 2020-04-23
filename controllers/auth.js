@@ -43,6 +43,7 @@ const register = (req,res) => {
     })
   })
 };
+
 //Post-Login user
 // POST - login user
 const login = (req, res) => {
@@ -70,6 +71,7 @@ const login = (req, res) => {
         });
     });
 };
+
 //verify current User
 const verify = (req,res) => {
   if (!req.session.currentUser) res.status(200).json({
@@ -77,6 +79,7 @@ const verify = (req,res) => {
     message: `Verification successful. Welcome. User ID: ${req.session.currentUser.id}`
   });
 };
+
 //Logout current user
 const logout = (req,res) => {
   if (!req.session.currentUser) return res.status(401).json({status: 401, message: 'Unauthorized'});

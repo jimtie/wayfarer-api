@@ -1,32 +1,14 @@
 const express = require('express');
 const router = express.Router();
-
+const ctrl = require('../controllers');
 
 // PATH = /api/v1/auth
-router.get('/verify', (req, res) => {
-  res.json({
-    apiCall: 'Auth Verify',
-  });
-});
+router.get('/verify', ctrl.auth.verify);
 
-router.post('/register', (req, res) => {
-  res.json({
-    apiCall: 'Auth Register',
-    data: req.body,
-  });
-});
+router.post('/register', ctrl.auth.register);
 
-router.post('/login', (req, res) => {
-  res.json({
-    apiCall: 'Auth Login',
-    data: req.body,
-  });
-});
+router.post('/login', ctrl.auth.login);
 
-router.delete('/logout', (req, res) => {
-  res.json({
-    apiCall: 'Auth Logout'
-  });
-});
+router.delete('/logout', ctrl.auth.logout);
 
 module.exports = router;

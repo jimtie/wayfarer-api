@@ -1,44 +1,20 @@
 const express = require('express');
 const router = express.Router();
+const ctrl = require('../controllers');
 
 // INDEX Posts
-router.get('/', (req, res) => {
-  res.json({
-    apiCall: 'INDEX Posts'
-  });
-});
+router.get('/city/:id', ctrl.posts.index);
 
 // SHOW Post
-router.get('/:id', (req, res) => {
-  res.json({
-    apiCall: 'SHOW Post',
-    id: req.params.id,
-  });
-});
+router.get('/:id', ctrl.posts.show);
 
 // CREATE Post
-router.post('/', (req, res) => {
-  res.json({
-    apiCall: 'CREATE Post',
-    data: req.body,
-  })
-});
+router.post('/', ctrl.posts.create);
 
 // UPDATE Post
-router.put('/:id', (req, res) => {
-  res.json({
-    apiCall: 'UPDATE Post',
-    id: req.params.id,
-    data: req.body,
-  })
-});
+router.put('/:id', ctrl.posts.update);
 
 // DELETE Post
-router.delete('/:id', (req, res) => {
-  res.json({
-    apiCall: 'DELETE Post',
-    id: req.params.id,
-  })
-});
+router.delete('/:id', ctrl.posts.deletePost);
 
 module.exports = router;

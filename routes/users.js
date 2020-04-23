@@ -1,29 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const ctrl = require('../controllers');
 
 // SHOW User
-router.get('/:id', (req, res) => {
-  res.json({
-    apiCall: 'SHOW User',
-    id: req.params.id,
-  });
-});
-
-// CREATE User
-router.post('/', (req, res) => {
-  res.json({
-    apiCall: 'CREATE User',
-    data: req.body,
-  });
-});
+router.get('/:id', ctrl.users.show);
 
 // UPDATE User
-router.put('/:id', (req, res) => {
-  res.json({
-    apiCall: 'UPDATE User',
-    id: req.params.id,
-    data: req.body,
-  });
-});
+router.put('/:id', ctrl.users.update);
 
 module.exports = router;
