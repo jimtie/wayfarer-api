@@ -14,14 +14,7 @@ async function index(req,res){
     })
   }
 }
-// const index = (req, res) => {
-//   db.City.find({}, (err, allCity) => {
-//     if (err) {
-//       return res.status(400).json({status: 400, error: 'Something went wrong, please try again'});
-//     }
-//     res.json(allCity);
-//   });
-// };
+
 
 //Show City By ID
 async function show(req, res){
@@ -49,18 +42,11 @@ async function create(req,res){
   catch{
     res.status(500).json({
       status: 500,
-      error: 'Somethign went wrong, please try again.'
+      error: 'Something went wrong, please try again.'
     })
   }
 }
-// const create = (req, res) => {
-//   db.City.create(req.body, (err, newCity) => {
-//     if (err) {
-//       return res.status(400).json({status: 400, error: 'Something went wrong, please try again'});
-//     }
-//     res.status(201).json(newCity);
-//   });
-// };
+
 
 
 module.exports = {
