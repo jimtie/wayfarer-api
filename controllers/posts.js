@@ -114,7 +114,7 @@ const destroyCityPost = (req, res) => {
   });
 };
 
-module.exports {
+module.exports = {
 showCityPost,
 createCityPost,
 updateItem,
