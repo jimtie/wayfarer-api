@@ -1,50 +1,40 @@
 const db = require('../models');
-
-// INDEX City
-const index = (req, res) => {
-  res.sendStatus(200);
-}
+const auth = require('./auth');
 
 //Show Post
-
-
-// const show = (req,res) => {
-//   db.Post.findById(req.params.id, (err,foundPost) => {
-//     if (err) {
-//       return res.status(400).json({status:400, error: 'Something went wrong, please try again'})
-//     }
-//
-//     if (!foundPost) {
-//       return res.status(400).json({status:400, error: 'Something went wrong, please try again'});
-//     }
-//     res.json(foundPost);
-//   });
-// }
-
 async function show(req,res) {
   try {
-    let foundPost = await db.Post.findById(req.params.id)
+    let foundPost = await db.Post.findById(req.params.id).populate('user');
     if (!foundPost) {
       return res.sendStatus(404);
     }
     res.json(foundPost);
   }
   catch(err){
+    console.log(err);
     res.status(500).json({
       status:500,
       error:'Server error. Please contact the administrators.'
-    })
+    });
   }
 };
 
 //Create Comment
 async function create(req, res) {
   try {
-    let newPost = await db.Post.create(req.body);
-    let foundCity = await db.City.findById(req.body.cityId);
-    foundCity.posts.push(newPost);
-    let savedCity = await foundCity.save();
-    res.json(newPost);
+    if (auth.authorized(req)){
+      let data = req.body;
+      data.user = req.session.currentUser.id;
+      let newPost = await db.Post.create(data);
+
+      let foundCity = await db.City.findById(req.body.city);
+      foundCity.posts.push(newPost._id);
+      let savedCity = await foundCity.save();
+      res.json(newPost);
+    }
+    else{
+      res.sendStatus(403);
+    }
   }
   catch(err) {
     res.status(500).json({
@@ -122,10 +112,37 @@ const deletePost = (req, res) => {
   });
 };
 
+// Index User Posts
+async function userPosts(req, res){
+  try{
+    if(!auth.authorized(req)){
+      let err = new Error('Unauthorized');
+      err.name="NoAuth";
+      throw err;
+    }
+
+    let posts = await db.Post.find({
+      user: req.session.currentUser.id
+    }).populate('city', 'name');
+
+    res.json(posts);
+  }
+  catch(err){
+    console.log(err);
+    switch (err.name){
+      case 'NoAuth':
+        res.sendStatus(403);
+        break;
+      default:
+        res.sendStatus(500);
+    }
+  }
+}
+
 module.exports = {
-  index,
   show,
   create,
   update,
   deletePost,
+  userPosts,
 }

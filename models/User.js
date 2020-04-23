@@ -1,9 +1,6 @@
-// Importing mongoose
 const mongoose = require("mongoose");
 const City = require('./City');
 
-// Building User Schema
-//NOTE: city embedded in user schema model
 
 const UserSchema = mongoose.Schema({
   name: {
