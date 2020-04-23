@@ -6,18 +6,36 @@ const index = (req, res) => {
 }
 
 //Show Post
-const show = (req,res) => {
-  db.Post.findById(req.params.id, (err,foundPost) => {
-    if (err) {
-      return res.status(400).json({status:400, error: 'Something went wrong, please try again'})
-    }
 
+
+// const show = (req,res) => {
+//   db.Post.findById(req.params.id, (err,foundPost) => {
+//     if (err) {
+//       return res.status(400).json({status:400, error: 'Something went wrong, please try again'})
+//     }
+//
+//     if (!foundPost) {
+//       return res.status(400).json({status:400, error: 'Something went wrong, please try again'});
+//     }
+//     res.json(foundPost);
+//   });
+// }
+
+async function show(req,res) {
+  try {
+    let foundPost = await db.Post.findById(req.params.id)
     if (!foundPost) {
-      return res.status(400).json({status:400, error: 'Something went wrong, please try again'});
+      return res.sendStatus(404);
     }
     res.json(foundPost);
-  });
-}
+  }
+  catch(err){
+    res.status(500).json({
+      status:500,
+      error:'Server error. Please contact the administrators.'
+    })
+  }
+};
 
 //Create Comment
 async function create(req, res) {
