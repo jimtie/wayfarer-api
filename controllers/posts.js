@@ -5,14 +5,12 @@ const index = (req, res) => {
   res.sendStatus(200);
 }
 
-//Show City
+//Show Post
 const show = (req,res) => {
-  db.City.findById(req.params.cityId, (err,foundCity) => {
+  db.Post.findById(req.params.id, (err,foundPost) => {
     if (err) {
       return res.status(400).json({status:400, error: 'Something went wrong, please try again'})
     }
-    //find city by // Id
-    const foundPost = foundCity.posts.id(req.params.postId);
 
     if (!foundPost) {
       return res.status(400).json({status:400, error: 'Something went wrong, please try again'});
@@ -22,33 +20,20 @@ const show = (req,res) => {
 }
 
 //Create Comment
-const create = (req, res) => {
-  console.log(req.body)
-  // Create Post
-  db.Post.create(req.body, (err, newPost) => {
-    if (err) {
-      return res.status(400).json({status: 400, error: 'Something went wrong, please try again'});
-    }
-
-    // Find city To Associate With Comment
-    db.City.findById(req.params.cityId, (err, foundcity) => {
-      if (err) {
-        return res.status(400).json({status: 400, error: 'Something went wrong, please try again'});
-      }
-
-      // Add Comment To city
-      foundcity.posts.push(newPost);
-
-      // Save
-      foundcity.save((err, savedcity) => {
-        if (err) {
-          return res.status(400).json({status: 400, error: 'Something went wrong, please try again'});
-        }
-
-        res.json(newPost);
-      });
-    });
-  });
+async function create(req, res) {
+  try {
+    let newPost = await db.Post.create(req.body);
+    let foundCity = await db.City.findById(req.body.cityId);
+    foundCity.posts.push(newPost);
+    let savedCity = await foundCity.save();
+    res.json(newPost);
+  }
+  catch(err) {
+    res.status(500).json({
+      status: 500,
+      error: 'Server error.'
+    })
+  }
 };
 
 //Updating Comment
