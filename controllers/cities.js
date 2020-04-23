@@ -12,13 +12,18 @@ const index = (req, res) => {
 };
 
 //Show City By ID
-const show = (req, res) => {
-  db.City.findById(req.params.id, (err, foundCity) => {
-    if (err) {
-      return res.status(400).json({status: 400, error: 'Something went wrong, please try again'});
-    }
+async function show(req, res){
+  try{
+    let foundCity = await db.City.findById(req.params.id).populate('posts');
     res.json(foundCity);
-  });
+  }
+  catch(err) {
+    console.log(err);
+    res.status(500).json({
+      status: 500,
+      error: 'Something went wrong, please try again'}
+    );
+  }
 };
 
 

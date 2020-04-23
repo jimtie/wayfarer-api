@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const ctrl = require('../controllers');
 
-// INDEX Posts
-router.get('/city/:id', ctrl.posts.index);
+// INDEX User Posts
+router.get('/user', ctrl.posts.userPosts);
 
 // SHOW Post
 router.get('/:id', ctrl.posts.show);

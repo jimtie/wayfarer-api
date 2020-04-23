@@ -74,9 +74,11 @@ const login = (req, res) => {
 
 //verify current User
 const verify = (req,res) => {
-  if (!req.session.currentUser) return res.status(401).json({
+  if (!authorized(req)){
+   return res.status(401).json({
     status: 401, message: 'Unauthorized'
-  });
+    });
+  }
   res.status(200).json({
     status:200,
     message: `Verification successful. Welcome. User ID: ${req.session.currentUser.id}`
@@ -92,9 +94,14 @@ const logout = (req,res) => {
   });
 };
 
+function authorized(req){
+  return (!!req.session.currentUser);
+}
+
 module.exports = {
   register,
   login,
   verify,
-  logout
+  logout,
+  authorized
 }
