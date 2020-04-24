@@ -17,6 +17,10 @@ const PostSchema = mongoose.Schema({
   city: {
     type: ObjectId,
     ref: 'City'
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
   }
 });
 

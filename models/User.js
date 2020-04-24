@@ -16,6 +16,10 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: [true,'Please enter a password.']
   },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
   city: [City.schema]
 });
 
