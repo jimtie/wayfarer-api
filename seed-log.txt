@@ -16,3 +16,31 @@ Seed Instance 1587751639789
 
 Deleted 4 cities.
 Created 4 cities.
+Seed Instance 1587754702249
+
+Deleted 4 cities.
+Created 4 cities.
+Deleted 5 cities.
+
+
+
+Seed Instance 1587754744428
+
+Deleted 4 cities.
+Created 4 cities.
+Deleted 4 cities.
+ReferenceError: userCreate is not defined
+
+
+
+Seed Instance 1587754765359
+
+Deleted 4 cities.
+Created 4 cities.
+Deleted 4 cities.
+Created 4 cities.
+Deleted 2 posts.
+Created 2 posts.
+
+
+
