@@ -1,5 +1,6 @@
-const db = require('../models')
-const bcrypt = require('bcrypt')
+const db = require('../models');
+const bcrypt = require('bcrypt');
+const utility = require('../utility');
 
 //Creating new user
 
@@ -94,14 +95,9 @@ const logout = (req,res) => {
   });
 };
 
-function authorized(req){
-  return (!!req.session.currentUser);
-}
-
 module.exports = {
   register,
   login,
   verify,
   logout,
-  authorized
 }

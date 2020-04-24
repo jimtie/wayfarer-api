@@ -1,4 +1,5 @@
-const db = require('../models')
+const db = require('../models');
+const utility = require('../utility');
 
 const show = (req, res) => {
     db.User.findById(req.params.id, (err, foundUser) => {
@@ -14,40 +15,19 @@ const show = (req, res) => {
     })
 }
 
-//Updating name, city, and post associated with user
-//Broken down into two functions
-
-const updateCity = (req, res) => {
+async function update(req, res){
   try{
-    let foundUser = await db.User.find(req.body.name);
-    if (err){
-      return res.status(400).json({
-        status:400, error: 'Something went wrong, please try again'
-      });
-      //Finding City by Id
-      let cityUpdate = foundUser.user.id(req.params.id);
-      if (!cityUpdate) {
-        return res.status(400).json({status: 400, error: 'City not Found, try again'});
-      }
-      //Changes associated city with user by changing name
-      cityUpdate.name = req.body.name;
-      //saving new city associated with user
-    let savedNewCity = await foundUser.save();
-    //rendering new city
-    let updatingCity = await db.User.findByIdAndUpdate(req.params.userId, req.body, {new: true});
-    if (err){
-      return res.status(400).json({status:400, error: 'Something went wrong, please try again'});
+    if(!auth.authorized(req)){
+      utility.throwAuthError();
     }
-    res.json(updatingCity);
 
+    let user = req.session.currentUser.id;
+    let updatedUser = await db.User.findByIdAndUpdate(user, req.body, {new: true});
+    res.json(updatedUser);
   }
-}
   catch(err) {
-  res.status(500).json({
-    status: 500,
-    error: 'Server error.'
-  });
-}
+    utility.handleError(err, res);
+  }
 }
 
 module.exports = {
