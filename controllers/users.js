@@ -8,14 +8,16 @@ async function show(req,res){
     if(!auth.authorized(req)){
       utility.throwAuthError();
     }
-    let foundUser = await db.User.findById(req.params.id);
-    if (!foundUser) {
-      return res.sendStatus(404);
+
+    let user = await db.User.findById(req.params.id);
+    if (!user) {
+      utility.throw4xx(404);
     }
-    res.json(foundUser);
+
+    res.json(utility.clientUser(user));
   }
   catch(err){
-    utility.handleError(err,res);
+    utility.handleError(err, res);
   }
 }
 
@@ -23,7 +25,7 @@ async function show(req,res){
 async function update(req, res){
   try{
     if(!auth.authorized(req)){
-      utility.throwAuthError();
+      utility.throw4xx(401);
     }
 
     let user = req.session.currentUser.id;
