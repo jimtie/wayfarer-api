@@ -48,11 +48,9 @@ Sample request:
 Sample response:
 ```
 {
+  "_id": "5ea1dc3fb266f21dae6c3940",
   "name": "My Name",
   "email": "myname@example.com",
-  "posts": [
-
-  ]
 }
 ```
 
