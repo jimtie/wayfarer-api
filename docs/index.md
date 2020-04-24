@@ -213,14 +213,9 @@ Not yet implemented.
 
 Not yet implemented.
 
-### PUT `users/:id`
+### PUT `users/`
 
 This controller updates a user and returns the updated data.
-
-Sample path:
-```
-http://localhost:3001/api/v1/users/5ea1dc3fb266f21dae6c3940
-```
 
 Sample request:
 
