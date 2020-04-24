@@ -86,13 +86,14 @@ async function seed(){
     console.log('Seeding users...');
     let userDelete = await db.User.deleteMany();
     log(`Deleted ${userDelete.n} cities.`);
-    let userCrate - await db.User.create(users);
+    let userCreate = await db.User.create(users);
     log(`Created ${userCreate.length} cities.`);
 
     // Delete all posts and seed
     console.log('Seeding posts...');
     let postDelete = await db.Post.deleteMany();
     log(`Deleted ${postDelete.n} posts.`)
+    let postCount = 0;
     for (let post of posts){
       // Get id of the named user
       let user = await db.User.findOne({
@@ -107,12 +108,14 @@ async function seed(){
       post.city = city._id;
 
       await db.Post.create(post);
+      postCount++;
     }
+    log(`Created ${postCount} posts.`)
     console.log('Seed complete.');
   }
   catch(err){
-      (err);
-      console.log('Seed failed.');
+      log(err);
+      console.log('Seed failed. See seed-log.txt for details.');
   }
   finally{
     log('\n\n')
