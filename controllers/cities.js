@@ -31,26 +31,7 @@ async function show(req, res){
   }
 };
 
-
-//Create New Item (POST)
-
-async function create(req,res){
-  try{
-    let newCity = await db.City.create(req.body);
-    res.status(201).json(newCity);
-  }
-  catch{
-    res.status(500).json({
-      status: 500,
-      error: 'Something went wrong, please try again.'
-    })
-  }
-}
-
-
-
 module.exports = {
   index,
   show,
-  create,
 };
