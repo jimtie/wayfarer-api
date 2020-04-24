@@ -41,12 +41,14 @@ const updateCity = (req, res) => {
     res.json(updatingCity);
 
   }
-  catch(err)
+}
+  catch(err) {
   res.status(500).json({
     status: 500,
     error: 'Server error.'
   });
-
+}
+}
 
 module.exports = {
     show,
