@@ -38,7 +38,7 @@ const register = (req,res) => {
         }
         db.User.create(newUser, (err, savedUser) => {
           if (err) return res.status(500).json({ status: 500, message: err})
-          return res.status(200).json({status:200, message: "User registered!"})
+          return res.status(200).json(utility.clientUser(savedUser));
         })
       })
     })
@@ -62,13 +62,8 @@ async function login(req, res){
       utility.throw4xx(401); // Unauthorized
     }
 
-    req.session.currentUser = { id: user._id };
-    res.json({
-      id: user._id,
-      name: user.name,
-      city: user.city,
-      joinDate: user.createdAt,
-    });
+    req.session.currentUser = utility.clientUser(user);
+    res.json(utility.clientUser(user));
   }
   catch(err){
     utility.handleError(err, res);

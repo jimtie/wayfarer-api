@@ -29,8 +29,18 @@ function handleError(error, res) {
   });
 }
 
+function clientUser(user){
+  return {
+    id: user._id,
+    name: user.name,
+    city: user.city,
+    joinDate: user.createdAt,
+  }
+}
+
 module.exports = {
   throw4xx,
   throwAuthError,
   handleError,
+  clientUser
 }
