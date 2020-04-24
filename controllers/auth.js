@@ -48,43 +48,57 @@ const register = (req,res) => {
 //Post-Login user
 // POST - login user
 const login = (req, res) => {
-    // console.log(req.body);
-    if (!req.body.email || !req.body.password) {
-        return res.status(400).json({ status: 400, message: 'Please enter your email and password' });
-    }
-
-    db.User.findOne({email: req.body.email}, (err, foundUser) => {
-        if (err) return res.status(500).json({ status: 500, message: 'Something went wrong, please try again' });
-
-        if (!foundUser) {
-            return res.status(400).json({ status: 400, message: 'Email or password is incorrect, please try again.'});
-        }
-
-        bcrypt.compare(req.body.password, foundUser.password, (err, isMatch) => {
-            if (err) return res.status(500).json({ status: 500, message: 'Something went wrong, please try again' });
-
-            if (isMatch) {
-                req.session.currentUser = { id: foundUser._id };
-                return res.status(200).json({ status: 200, message: 'Success!', data: foundUser._id });
-            } else {
-                return res.status(400).json({ status: 400, message: 'Email or password is incorrect, please try again.' });
-            }
-        });
-    });
+  res.sendStatus(200);
+  // console.log(req.body);
+  //   // console.log(req.body);
+  //   if (!req.body.email || !req.body.password) {
+  //       return res.status(401).json({ status: 400, message: 'Please enter your email and password' });
+  //   }
+  //
+  //   db.User.findOne({email: req.body.email}, (err, foundUser) => {
+  //       if (err) return res.status(500).json({ status: 500, message: 'Something went wrong, please try again' });
+  //
+  //       if (!foundUser) {
+  //           return res.status(401).json({ status: 400, message: 'Email or password is incorrect, please try again.'});
+  //       }
+  //
+  //       bcrypt.compare(req.body.password, foundUser.password, (err, isMatch) => {
+  //           if (err) return res.status(500).json({ status: 500, message: 'Something went wrong, please try again' });
+  //
+  //           if (isMatch) {
+  //               req.session.currentUser = { id: foundUser._id };
+  //               return res.status(200).json({ status: 200, message: 'Success!', data: foundUser._id });
+  //           } else {
+  //               return res.status(400).json({ status: 401, message: 'Email or password is incorrect, please try again.' });
+  //           }
+  //       });
+  //   });
 };
 
 //verify current User
 const verify = (req,res) => {
   if (!authorized(req)){
-   return res.status(401).json({
-    status: 401, message: 'Unauthorized'
-    });
+    utility.throwAuthError();
   }
   res.status(200).json({
     status:200,
     message: `Verification successful. Welcome. User ID: ${req.session.currentUser.id}`
   });
 };
+
+async function verifyDebug(req, res){
+  console.log('verifyDebug');
+  try{
+    let user = await db.User.findOne();
+    res.json({
+      status: 200,
+      data: user
+    });
+  }
+  catch(err){
+    utility.handleError(err, res);
+  }
+}
 
 //Logout current user
 const logout = (req,res) => {
@@ -95,9 +109,15 @@ const logout = (req,res) => {
   });
 };
 
+function authorized(req){
+  return (!!req.session.currentUser);
+}
+
 module.exports = {
   register,
   login,
   verify,
   logout,
+  verifyDebug,
+  authorized
 }

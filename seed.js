@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const db = require('./models');
 const fs = require('fs');
 
-const logFile = './seed-log.txt';
+const logFile = './seed.log';
 const logMessage = `Seed Instance ${Date.now()}\n\n`;
 
 const log = (message) => {
@@ -111,11 +111,11 @@ async function seed(){
       postCount++;
     }
     log(`Created ${postCount} posts.`)
-    console.log('Seed complete.');
+    console.log('Seed complete. See seed.log for details.');
   }
   catch(err){
       log(err);
-      console.log('Seed failed. See seed-log.txt for details.');
+      console.log('Seed failed. See seed.log for details.');
   }
   finally{
     log('\n\n')

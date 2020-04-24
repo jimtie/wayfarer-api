@@ -1,4 +1,5 @@
 const db = require('../models');
+const auth = require('./auth');
 const utility = require('../utility');
 
 const show = (req, res) => {
