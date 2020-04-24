@@ -2,14 +2,19 @@ const db = require('../models');
 
 
 //All City Shown
-const index = (req, res) => {
-  db.City.find({}, (err, allCity) => {
-    if (err) {
-      return res.status(400).json({status: 400, error: 'Something went wrong, please try again'});
-    }
-    res.json(allCity);
-  });
-};
+async function index(req,res){
+  try{
+    let allCity = await db.City.find()
+    res.json(allCity)
+  }
+  catch(err){
+    res.status(500).json({
+      status:500,
+      error: 'Something went wrong, please try again.'
+    })
+  }
+}
+
 
 //Show City By ID
 async function show(req, res){
