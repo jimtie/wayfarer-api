@@ -45,35 +45,36 @@ const register = (req,res) => {
   })
 };
 
-//Post-Login user
-// POST - login user
-const login = (req, res) => {
-  res.sendStatus(200);
-  // console.log(req.body);
-  //   // console.log(req.body);
-  //   if (!req.body.email || !req.body.password) {
-  //       return res.status(401).json({ status: 400, message: 'Please enter your email and password' });
-  //   }
-  //
-  //   db.User.findOne({email: req.body.email}, (err, foundUser) => {
-  //       if (err) return res.status(500).json({ status: 500, message: 'Something went wrong, please try again' });
-  //
-  //       if (!foundUser) {
-  //           return res.status(401).json({ status: 400, message: 'Email or password is incorrect, please try again.'});
-  //       }
-  //
-  //       bcrypt.compare(req.body.password, foundUser.password, (err, isMatch) => {
-  //           if (err) return res.status(500).json({ status: 500, message: 'Something went wrong, please try again' });
-  //
-  //           if (isMatch) {
-  //               req.session.currentUser = { id: foundUser._id };
-  //               return res.status(200).json({ status: 200, message: 'Success!', data: foundUser._id });
-  //           } else {
-  //               return res.status(400).json({ status: 401, message: 'Email or password is incorrect, please try again.' });
-  //           }
-  //       });
-  //   });
-};
+
+async function login(req, res){
+  try{
+    if (!req.body.email || !req.body.password){
+      utility.throw4xx(401); // Unauthorized
+    }
+
+    let user = await db.User.findOne({email: req.body.email});
+    if (!user){
+      utility.throw4xx(401); // Unauthorized
+    }
+
+    let passMatch = await bcrypt.compare(req.body.password, user.password);
+    if (!passMatch){
+      utility.throw4xx(401); // Unauthorized
+    }
+
+    req.session.currentUser = { id: user._id };
+    res.json({
+      id: user._id,
+      name: user.name,
+      city: user.city,
+      joinDate: user.createdAt,
+    });
+  }
+  catch(err){
+    utility.handleError(err, res);
+  }
+}
+
 
 //verify current User
 const verify = (req,res) => {

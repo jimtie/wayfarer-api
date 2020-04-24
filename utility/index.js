@@ -1,10 +1,21 @@
 // Utility Functions
 
+const httpErrors = {
+  400: Error('Bad Request'),
+  401: Error('Unauthorized'),
+  403: Error('Forbidden'),
+  404: Error('Not Found'),
+}
+
 // Error Utilities
+function throw4xx(status){
+  err = httpErrors[status];
+  err.number = status;
+  throw err;
+}
+
 function throwAuthError(){
-  let authError = new Error('Unauthorized');
-  authError.name='NoAuth';
-  throw authError;
+  throw4xx(401);
 }
 
 function handleError(error, res) {
@@ -12,21 +23,14 @@ function handleError(error, res) {
   console.log(error);
   console.log('----------');
 
-  if (error.name = 'NoAuth'){
-    res.status(403).json({
-      status: 403,
-      error: 'Unauthorized',
-    });
-  }
-  else {
-    res.status(500).json({
-      status: 500,
-      error: 'Internal Server Error'
-    })
-  }
+  res.status(err.number).json({
+    status: err.number,
+    message: err.message,
+  });
 }
 
 module.exports = {
+  throw4xx,
   throwAuthError,
   handleError,
 }

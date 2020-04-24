@@ -36,7 +36,8 @@ const users = [
   {
     name: "Seanny Phoenix",
     email: "seannyphoenix@gmail.com",
-    password: "testing123"
+    password: "$2b$10$b/19NiIVUPQID99p7YK62ugLD3skR0daNcVu4yGSz/4kw1yCCkQSS",
+    plaintext: "testing123",
   },
   {
     name: "Sri Subramanian",
