@@ -20,7 +20,7 @@ const UserSchema = mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  city: [City.schema]
+  city: City.schema
 });
 
 const User = mongoose.model('User', UserSchema)
