@@ -1,7 +1,31 @@
 const db = require('../models');
 const auth = require('./auth');
 
-//Show Post
+function throwAuthError(){
+  let authError = new Error('Unauthorized');
+  authError.name='NoAuth';
+  throw authError;
+}
+
+function handleError(error, res) {
+  console.log('----------');
+  console.log(error);
+  console.log('----------');
+  if (error.name = 'NoAuth'){
+    res.status(403).json({
+      status: 403,
+      error: 'Unauthorized',
+    });
+  }
+  else {
+    res.status(500).json({
+      status: 500,
+      error: 'Internal Server Error'
+    })
+  }
+}
+
+// SHOW Post
 async function show(req,res) {
   try {
     let foundPost = await db.Post.findById(req.params.id).populate('user');
@@ -19,7 +43,7 @@ async function show(req,res) {
   }
 };
 
-//Create Comment
+// CREATE Post
 async function create(req, res) {
   try {
     if (auth.authorized(req)){
@@ -33,19 +57,33 @@ async function create(req, res) {
       res.json(newPost);
     }
     else{
-      res.sendStatus(403);
+      throw authError;
     }
   }
   catch(err) {
-    res.status(500).json({
-      status: 500,
-      error: 'Server error.'
-    })
+    handleError(err, res);
   }
 };
 
-//Updating Comment
-const update = (req,res) => {
+// UPDATE Post
+async function update(req, res){
+  try{
+    if (auth.authorized(req)){
+      let deletedPost = await db.Post.findById(req.params.id);
+      if (req.session.currentUser.id !== String(deletedPost.user)){
+        throw authError;
+      }
+    }
+    else{
+      throw authError;
+    }
+  }
+  catch(err){
+    handleError(err, res);
+  }
+}
+
+async function update(req,res) {
   //find city by Id
   db.City.findById(req.params.cityId, (err,foundCity) => {
     if (err){
@@ -76,43 +114,35 @@ const update = (req,res) => {
 });
 };
 
-//Delete Comment
-const deletePost = (req, res) => {
-  // Find City By ID
-  db.City.findById(req.params.cityId, (err, foundCity) => {
-    if (err) {
-      return res.status(400).json({status: 400, error: 'Something went wrong, please try again'});
-    }
-
-    // Find ID
-    const postToDelete = foundCity.posts.id(req.params.postId);
-
-    if (!postToDelete) {
-      return res.status(400).json({status: 400, error: 'Could not find post'});
-    }
-
-    // Delete from record
-    postToDelete.remove();
-
-    // Save
-    foundCity.save((err, savedCity) => {
-      if (err) {
-        return res.status(400).json({status: 400, error: 'Something went wrong, please try again'});
+// DELETE Post
+async function deletePost(req, res){
+  try{
+    if (auth.authorized(req)){
+      let deletedPost = await db.Post.findById(req.params.id);
+      if (req.session.currentUser.id !== String(deletedPost.user)){
+        let e = new Error('Unauthorized');
+        e.name = 'NoAuth';
+        throw e;
       }
-
-      // Delete indefinitely
-      db.Post.findByIdAndDelete(req.params.postId, (err, deletedCity) => {
-        if (err) {
-          return res.status(400).json({status: 400, error: 'Something went wrong, please try again'});
-        }
-
-        res.json(deletedCity);
-      });
-    });
-  });
+      deletedPost.remove();
+      let refCity = await db.City.findById(deletedPost.city);
+      let index = refCity.posts.indexOf(req.params.id);
+      refCity.posts.splice(index,1);
+      await refCity.save();
+      res.json(deletedPost);
+    }
+    else{
+      let e = new Error('Unauthorized');
+      e.name = 'NoAuth';
+      throw e;
+    }
+  }
+  catch(err){
+    handleError(err, res);
+  }
 };
 
-// Index User Posts
+// INDEX User Posts
 async function userPosts(req, res){
   try{
     if(!auth.authorized(req)){
@@ -128,14 +158,7 @@ async function userPosts(req, res){
     res.json(posts);
   }
   catch(err){
-    console.log(err);
-    switch (err.name){
-      case 'NoAuth':
-        res.sendStatus(403);
-        break;
-      default:
-        res.sendStatus(500);
-    }
+    handleError(error, res);
   }
 }
 
