@@ -34,7 +34,7 @@ function clientUser(user){
     id: user._id,
     name: user.name,
     city: {
-      id: 0,
+      id: -1,
       name: 'not yet selected',
     },
     joinDate: user.createdAt,
