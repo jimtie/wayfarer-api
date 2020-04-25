@@ -30,16 +30,25 @@ function handleError(error, res) {
 }
 
 function clientUser(user){
-  return {
+  let clientUser = {
     id: user._id,
     name: user.name,
     city: {
-      id: user.city._id,
-      name: user.city.name,
+      id: 0,
+      name: 'not yet selected',
     },
     joinDate: user.createdAt,
     posts: user.post,
   }
+
+  if (user.city){
+    clientUser.city = {
+      id: user.city._id,
+      name: user.city.name,
+    }
+  }
+
+  return clientUser;
 }
 
 module.exports = {
