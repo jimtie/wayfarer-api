@@ -1,4 +1,5 @@
 const db = require('../models');
+const auth = require('./auth');
 const utility = require('../utility');
 
 // SHOW Post
@@ -136,7 +137,7 @@ async function userPosts(req, res){
 
     let posts = await db.Post.find({
       user: req.session.currentUser.id
-    }).populate('city', 'name');
+    }).populate('city', 'name').populate('user', 'name');
 
     res.json(posts);
   }
