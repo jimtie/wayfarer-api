@@ -16,7 +16,6 @@ async function show(req,res) {
 };
 
 //show all posts of a user
-
 async function showUserPost(req,res){
   try {
     let foundUserPost = await db.Post.find(req.body.user)
@@ -152,4 +151,5 @@ module.exports = {
   update,
   deletePost,
   userPosts,
+  showUserPost
 }
