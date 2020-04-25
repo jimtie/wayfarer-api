@@ -29,8 +29,13 @@ async function update(req, res){
     }
 
     let user = req.session.currentUser.id;
-    let updatedUser = await db.User.findByIdAndUpdate(user, req.body, {new: true});
-    res.json(updatedUser);
+    req.body.city = await db.City.findById(req.body.city);
+    let updatedUser = await db.User.findByIdAndUpdate(
+      user,
+      req.body,
+      {new: true}
+    );
+    res.json(utility.clientUser(updatedUser));
   }
   catch(err) {
     utility.handleError(err, res);

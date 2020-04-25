@@ -6,6 +6,6 @@ const ctrl = require('../controllers');
 router.get('/:id', ctrl.users.show);
 
 // UPDATE User
-router.put('/:id', ctrl.users.update);
+router.put('/', ctrl.users.update);
 
 module.exports = router;

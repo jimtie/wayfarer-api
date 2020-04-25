@@ -10,7 +10,4 @@ router.post('/login', ctrl.auth.login);
 
 router.delete('/logout', ctrl.auth.logout);
 
-//// DEBUG
-router.get('/verify/debug', ctrl.auth.verifyDebug);
-
 module.exports = router;

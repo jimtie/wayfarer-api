@@ -33,7 +33,10 @@ function clientUser(user){
   return {
     id: user._id,
     name: user.name,
-    city: user.city,
+    city: {
+      id: user.city._id,
+      name: user.city.name,
+    },
     joinDate: user.createdAt,
     posts: user.post,
   }
