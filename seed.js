@@ -135,7 +135,9 @@ async function seed(){
       });
       post.city = city._id;
 
-      await db.Post.create(post);
+      let newPost = await db.Post.create(post);
+      city.posts.push(newPost._id);
+      await city.save();
       postCount++;
     }
     log(`Created ${postCount} posts.`)
