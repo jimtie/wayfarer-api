@@ -72,29 +72,23 @@ async function login(req, res){
 
 
 //verify current User
-const verify = (req,res) => {
-  if (!authorized(req)){
-    utility.throwAuthError();
-  }
-  res.status(200).json({
-    status:200,
-    message: `Verification successful. Welcome. User ID: ${req.session.currentUser.id}`
-  });
-};
-
-async function verifyDebug(req, res){
-  console.log('verifyDebug');
+async function verify(req,res){
   try{
-    let user = await db.User.findOne();
-    res.json({
-      status: 200,
-      data: user
-    });
+    if (!authorized(req)){
+      utility.throw4xx(401);
+    }
+
+    let user = await db.User.findById(req.session.currentUser.id);
+    if (!user){
+      utility.throw4xx(400);
+    }
+
+    res.json(utility.clientUser(user));
   }
   catch(err){
     utility.handleError(err, res);
   }
-}
+};
 
 //Logout current user
 const logout = (req,res) => {
@@ -114,6 +108,5 @@ module.exports = {
   login,
   verify,
   logout,
-  verifyDebug,
   authorized
 }
