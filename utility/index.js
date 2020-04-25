@@ -35,6 +35,7 @@ function clientUser(user){
     name: user.name,
     city: user.city,
     joinDate: user.createdAt,
+    posts: user.post,
   }
 }
 

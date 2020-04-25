@@ -15,6 +15,21 @@ async function show(req,res) {
   }
 };
 
+//show all posts of a user
+
+async function showUserPost(req,res){
+  try {
+    let foundUserPost = await db.Post.find(req.body.user)
+    if (!foundUserPost) {
+      return res.sendStatus(404);
+    }
+    res.json(foundUserPost);
+  }
+  catch(err){
+    utility.handleError(err,res);
+  }
+};
+
 // CREATE Post
 async function create(req, res) {
   try {
