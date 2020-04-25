@@ -2,50 +2,46 @@ const db = require('../models');
 const bcrypt = require('bcrypt');
 const utility = require('../utility');
 
-//Creating new user
+/**
+ * Register a new user
+ * @param  {[type]} req HTTP Request
+ * @param  {[type]} res HTTP Response
+ * @return {[type]}     The new user
+ */
+async function register(req, res) {
+  try{
+    if(!req.body.name || !req.body.email || !req.body.password) {
+      utility.throw4xx(401);
+    }
 
-const register = (req,res) => {
-  //Make sure that data being posted has the required fields
-  if(!req.body.name || !req.body.email || !req.body.password) {
-    return res.status(400).json({
-      status:400,
-      message: "One or more fields have not been filled out. Please enter a name, email, and password and try again."
-    })
+    let existingEmail = await db.User.findOne({email: req.body.email});
+    if (existingEmail){
+      utility.throw4xx(401);
+    }
+
+    let salt = await bcrypt.genSalt(10);
+    let hash = await bcrypt.hash(req.body.password, salt);
+
+    const newUser = {
+      name: req.body.name,
+      email: req.body.email,
+      password: hash
+    }
+
+    let user = await db.User.create(newUser);
+    res.json(utility.clientUser(user));
   }
-  db.User.findOne({email: req.body.email}, (err,foundUser) => {
-    if (err) return res.status(500).json({
-      status:500,
-      message: "Something went wrong, please try again."
-    })
-    if (foundUser) return res.status(400).json({
-      status: 400,
-      message:"User with that email already exists!"
-    })
-    bcrypt.genSalt(10, (err, salt) => {
-      if (err) return res.status(500).json({
-        status:500,
-        message: "Something went wrong, please try again."
-      })
-      bcrypt.hash(req.body.password, salt, (err,hash) => {
-        if (err) return res.status(500).json({
-          status: 500,
-          message: 'Something went wrong, please try again.'
-        })
-        const newUser = {
-          name: req.body.name,
-          email: req.body.email,
-          password: hash
-        }
-        db.User.create(newUser, (err, savedUser) => {
-          if (err) return res.status(500).json({ status: 500, message: err})
-          return res.status(200).json(utility.clientUser(savedUser));
-        })
-      })
-    })
-  })
-};
+  catch(err){
+    utility.handleError(err, res);
+  }
+}
 
-
+/**
+ * Logs the user in
+ * @param  {[type]} req HTTP Request
+ * @param  {[type]} res HTTP Response
+ * @return {[type]}     The logged-in user
+ */
 async function login(req, res){
   try{
     if (!req.body.email || !req.body.password){
@@ -71,7 +67,12 @@ async function login(req, res){
 }
 
 
-//verify current User
+/**
+ * Verify the current user
+ * @param  {[type]} req HTTP Request
+ * @param  {[type]} res HTTP Response
+ * @return {[type]}     The verified user
+ */
 async function verify(req,res){
   try{
     if (!authorized(req)){
@@ -90,17 +91,29 @@ async function verify(req,res){
   }
 };
 
-//Logout current user
-const logout = (req,res) => {
-  if (!req.session.currentUser) return res.status(401).json({status: 401, message: 'Unauthorized'});
-  req.session.destroy((err) => {
-    if (err) return res.status(500).json({status:500, message: 'Something went wrong, please try again.'});
+/**
+ * Log out the current user
+ * @param  {[type]} req HTTP Request
+ * @param  {[type]} res HTTP Response
+ * @return {[type]}     Status 200
+ */
+async function logout(req, res){
+  try{
+    if (authorized(req)){
+      throw4xx(401);
+    }
+
+    await req.session.destroy();
     res.sendStatus(200);
-  });
-};
+
+  }
+  catch(err){
+    utility.handleError(err, res);
+  }
+}
 
 function authorized(req){
-  return (!!req.session.currentUser);
+  return(!!req.session.currentUser);
 }
 
 module.exports = {
@@ -108,5 +121,4 @@ module.exports = {
   login,
   verify,
   logout,
-  authorized
 }
