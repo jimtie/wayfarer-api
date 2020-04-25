@@ -72,6 +72,30 @@ const posts = [
     user: "Sri Subramanian",
     city: "Paris"
   },
+  {
+    title: "Get the croissants!",
+    content: "Paris is for croissant lovers.",
+    user: "Laura Sack",
+    city: "Paris"
+  },
+  {
+    title: "London Eye",
+    content: "An expensive thrill and not for everyone, but the view is spectacular.",
+    user: "Jimmy Chen",
+    city: "London"
+  },
+  {
+    title: "Gibraltar is a must",
+    content: "Little known gem. Highly recommend.",
+    user: "Seanny Phoenix",
+    city: "Gibraltar"
+  },
+  {
+    title: "Pass on Ghirardelli Square",
+    content: "Total tourist trap, chocolate is nothing to write home about.",
+    user: "Sri Subramanian",
+    city: "San Francisco"
+  },
 ];
 
 async function seed(){
