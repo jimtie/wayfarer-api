@@ -42,17 +42,20 @@ const users = [
   {
     name: "Sri Subramanian",
     email: "srirang97@gmail.com",
-    password: "123coder"
+    password: "$2b$10$Xt9LeIQgvAaH2A1UH/20m.nCd/rmb/4HC0zJyhhXbpXFSGn030R6y",
+    plaintext: "123coder",
   },
   {
     name: "Laura Sack",
     email: "lauragsack@gmail.com",
-    password: "dev01"
+    password: "$2b$10$kwzbhqrPugfHMLBuslu39OiKs9CC1gD4pfVFQkcHWhUj9mpnqcsKu",
+    plaintext: "dev01",
   },
   {
     name: "Jimmy Chen",
     email: "jimmychen.xin@gmail.com",
-    password: "jimmy000"
+    password: "$2b$10$7m24zqpRGOsSYywIuRJAVujwmENHYnDx4Udv/vc8zUCGIR2zIVsy2",
+    plaintext: "jimmy000",
   }
 ];
 
