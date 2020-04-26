@@ -200,18 +200,81 @@ Sample response:
   "title": "Awesome Transit",
   "content": "OMG I love MUNI! I got to ride the old cable car to the top of Lombard St, and I took the light rail to Ocean Beach.",
   "city": "5ea1d06b1332071875d21804",
-  "user": "5ea1dc3fb266f21dae6c3940",
+  "user": {
+    "_id: "5ea1dc3fb266f21dae6c3940",
+    "name": "My Name"
+    },
   "__v": 0
 }
 ```
 
 ### POST `/posts`
 
-Not yet implemented.
+This controller creates a post.
+
+Sample request:
+
+*all fields required*
+```
+{
+  "title": "Pass on Ghirardelli Square",
+  "content": "Total tourist trap, chocolate is nothing to write home about.",
+  "user": "5ea1dc3fb266f21dae6c3940",
+  "city": "5ea1d06b1332071875d21804"
+}
+```
+
+Sample response:
+```
+{
+  "_id": "5ea217d9c0776f3a7d67c05e",
+  title: "Pass on Ghirardelli Square",
+  content: "Total tourist trap, chocolate is nothing to write home about.",
+  "city": "5ea1d06b1332071875d21804",
+  "user": {
+    "_id: "5ea1dc3fb266f21dae6c3940",
+    "name": "My Name"
+    },
+  "__v": 0
+}
+```
 
 ### PUT `/posts/:id`
 
-Not yet implemented.
+This controller updates a post with the specified data.
+
+Sample path:
+
+```
+http://localhost:3001/api/v1/posts/5ea217d9c0776f3a7d67c05e
+```
+
+Sample Request
+
+*all fields optional*
+```
+{
+  "title": "Ghirardelli Square Sucks",
+  "content": "Total tourist trap. The chocolate is nothing to write home about.",
+  "user": "5ea1dc3fb266f21dae6c3940",
+  "city": "5ea1d30d1332071875d21806"
+}
+```
+
+Sample response:
+```
+{
+  "_id": "5ea217d9c0776f3a7d67c05e",
+  title: "Ghirardelli Square Sucks",
+  content: "Total tourist trap. The chocolate is nothing to write home about.",
+  "city": "5ea1d06b1332071875d21804",
+  "user": {
+    "_id: "5ea1dc3fb266f21dae6c3940",
+    "name": "My Name"
+    },
+  "__v": 0
+}
+```
 
 ## Users
 

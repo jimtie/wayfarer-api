@@ -18,9 +18,9 @@ function throwAuthError(){
   throw4xx(401);
 }
 
-function handleError(error, res) {
+function handleError(err, res) {
   console.log('----------');
-  console.log(error);
+  console.log(err);
   console.log('----------');
 
   res.status(err.number).json({

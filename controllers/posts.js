@@ -2,10 +2,15 @@ const db = require('../models');
 const auth = require('./auth');
 const utility = require('../utility');
 
-// SHOW Post
+/**
+ * SHOW one post
+ * @param  {[type]} req HTTP Request
+ * @param  {[type]} res HTTP Response
+ * @return {[type]}     The requested post
+ */
 async function show(req,res) {
   try {
-    let foundPost = await db.Post.findById(req.params.id).populate('user');
+    let foundPost = await db.Post.findById(req.params.id).populate('user', 'name');
     if (!foundPost) {
       return res.sendStatus(404);
     }
@@ -16,26 +21,18 @@ async function show(req,res) {
   }
 };
 
-//show all posts of a user
-async function showUserPost(req,res){
-  try {
-    let foundUserPost = await db.Post.find(req.body.user)
-    if (!foundUserPost) {
-      return res.sendStatus(404);
-    }
-    res.json(foundUserPost);
-  }
-  catch(err){
-    utility.handleError(err,res);
-  }
-};
-
-// CREATE Post
+/**
+ * CREATE post
+ * @param  {[type]} req HTTP Request
+ * @param  {[type]} res HTTP Response
+ * @param
+ * @return {[type]}     The requested post
+ */
 async function create(req, res) {
   try {
-    if (!auth.authorized(req)){
-      utility.throwAuthError();
-    }
+    // if (!auth.authorized(req)){
+    //   utility.throwAuthError();
+    // }
 
     let data = req.body;
     data.user = req.session.currentUser.id;
@@ -52,71 +49,60 @@ async function create(req, res) {
 };
 
 /**
- * Update specified post
- * @param  {[type]} req [description]
- * @param  {[type]} res [description]
- * @return {[type]}     [description]
+ * UPDATE post
+ * @param  {[type]} req HTTP Request
+ * @param  {[type]} res HTTP Response
+ * @param
+ * @return {[type]}     The requested post
  */
 async function update(req,res) {
-  //find city by Id
-  db.City.findById(req.params.cityId, (err,foundCity) => {
-    if (err){
-      return res.status(400).json({status:400, error: 'Something went wrong, please try again'});
-    }
-    //Finding ID
-    const postToUpdate = foundCity.posts.id(req.params.postId);
+  try{
+    let post = await db.Post.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {new: true}
+    );
+    res.json(post);
+  }
+  catch(err){
+    util.handleError(err, res);
+  }
+}
 
-    if (!postToUpdate) {
-      return res.status(400).json({status: 400, error: 'Post not Found, try again'});
-    }
-
-    //Updating comment
-    postToUpdate.title = req.body.title;
-    postToUpdate.content = req.body.content;
-
-    foundCity.save((err, savedCity) => {
-    if (err){
-      return res.status(400).json({status:400, error: 'Something went wrong, please try again'});
-    }
-    db.Post.findByIdAndUpdate(req.params.postId, req.body, {new: true}, (err, updatedCity) => {
-      if (err){
-        return res.status(400).json({status:400, error: 'Something went wrong, please try again'});
-      }
-      res.json(updatedCity);
-    });
-  });
-});
-};
-
-// DELETE Post
+/**
+ * DELETE post
+ * @param  {[type]} req HTTP Request
+ * @param  {[type]} res HTTP Response
+ * @return {[type]}     The requested post
+ */
 async function deletePost(req, res){
   try{
-    if (auth.authorized(req)){
-      let deletedPost = await db.Post.findById(req.params.id);
-      if (req.session.currentUser.id !== String(deletedPost.user)){
-        let e = new Error('Unauthorized');
-        e.name = 'NoAuth';
-        throw e;
-      }
-      deletedPost.remove();
-      let refCity = await db.City.findById(deletedPost.city);
-      let index = refCity.posts.indexOf(req.params.id);
-      refCity.posts.splice(index,1);
-      await refCity.save();
-      res.json(deletedPost);
+    let post = await db.Post.findById(req.params.id);
+    if (!post){
+      utility.throw4xx(404);
     }
-    else{
-      let e = new Error('Unauthorized');
-      e.name = 'NoAuth';
-      throw e;
-    }
+    // if (req.session.currentUser.id !== String(deletedPost.user)){
+    //   utility.throw4xx(403)
+    // }
+    post.remove();
+    let refCity = await db.City.findById(post.city);
+    let index = refCity.posts.indexOf(req.params.id);
+    refCity.posts.splice(index,1);
+    await refCity.save();
+    res.json(post);
   }
   catch(err){
     utility.handleError(err, res);
   }
 };
 
-// INDEX User Posts
+/**
+ * INDEX posts for user
+ * @param  {[type]} req HTTP Request
+ * @param  {[type]} res HTTP Response
+ * @param
+ * @return {[type]}     The requested post
+ */
 async function userPosts(req, res){
   try{
     if(!auth.authorized(req)){

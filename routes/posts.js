@@ -8,10 +8,6 @@ router.get('/user', ctrl.posts.userPosts);
 // SHOW Post
 router.get('/:id', ctrl.posts.show);
 
-//SHOW All User Posts
-
-// router.get('/all', ctrl.posts.showUserPost);
-
 // CREATE Post
 router.post('/', ctrl.posts.create);
 
