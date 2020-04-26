@@ -99,9 +99,9 @@ async function verify(req,res){
  */
 async function logout(req, res){
   try{
-    // if (authorized(req)){
-    //   utility.throw4xx(401);
-    // }
+    if (authorized(req)){
+      utility.throw4xx(401);
+    }
 
     await req.session.destroy();
     res.sendStatus(200);
