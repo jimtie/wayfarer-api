@@ -51,24 +51,12 @@ async function create(req, res) {
   }
 };
 
-// UPDATE Post
-async function update(req, res){
-  try{
-    if (!auth.authorized(req)){
-      utility.throwAuthError();
-    }
-
-    let deletedPost = await db.Post.findById(req.params.id);
-    if (req.session.currentUser.id !== String(deletedPost.user)){
-      utility.throwAuthError();
-    }
-  }
-  catch(err){
-    utility.handleError(err, res);
-  }
-}
-
-// UPDATE Post
+/**
+ * Update specified post
+ * @param  {[type]} req [description]
+ * @param  {[type]} res [description]
+ * @return {[type]}     [description]
+ */
 async function update(req,res) {
   //find city by Id
   db.City.findById(req.params.cityId, (err,foundCity) => {
