@@ -152,7 +152,10 @@ Sample response:
       "title": "Beautiful Views",
       "content": "I love the views we have here in San Francisco! Meander along the Embarcadero, or climb Twin Peaks. You'll be amazed by the beauty",
       "city": "5ea1d06b1332071875d21804",
-      "user": "5ea1dc3fb266f21dae6c3940",
+      "user": {
+        "_id": "5ea1dc3fb266f21dae6c3940",
+        "name": "My Name"
+      },
       "__v": 0
     },
     {
@@ -160,7 +163,10 @@ Sample response:
       "title": "Awesome Transit",
       "content": "OMG I love MUNI! I got to ride the old cable car to the top of Lombard St, and I took the light rail to Ocean Beach.",
       "city": "5ea1d06b1332071875d21804",
-      "user": "5ea1dc3fb266f21dae6c3940",
+      "user": {
+        "_id": "5ea1dc3fb266f21dae6c3940",
+        "name": "My Name"
+      },
       "__v": 0
     }
   ],
