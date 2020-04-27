@@ -5,6 +5,8 @@ const ctrl = require('../controllers');
 // INDEX User Posts
 router.get('/user', ctrl.posts.userPosts);
 
+router.get('/city/:id', ctrl.posts.cityPosts);
+
 // SHOW Post
 router.get('/:id', ctrl.posts.show);
 

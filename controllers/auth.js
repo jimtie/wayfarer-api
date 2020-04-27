@@ -100,7 +100,7 @@ async function verify(req,res){
 async function logout(req, res){
   try{
     if (authorized(req)){
-      throw4xx(401);
+      utility.throw4xx(401);
     }
 
     await req.session.destroy();
@@ -121,4 +121,5 @@ module.exports = {
   login,
   verify,
   logout,
+  authorized
 }
