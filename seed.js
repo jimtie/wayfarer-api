@@ -28,28 +28,26 @@ const cities = [
         src: "https://images.unsplash.com/photo-1565354886821-203cb17878fd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=90&h=90&q=80",
       },
       header: {
-        src: "https://images.unsplash.com/photo-1423347673683-ccdb7f6a948f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80",
+        src: "https://images.unsplash.com/photo-1423347673683-ccdb7f6a948f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&q=80",
       },
     }
   },
-//   {
-//     name: "London",
-//     description: "London, the capital of England and the United Kingdom, is a 21st-century city with history stretching back to Roman times",
-//     images: {
-//       carousel: {
-//         src: "",
-//         credit: ""
-//       },
-//       icon: {
-//         src: "",
-//         credit: ""
-//       },
-//       header: {
-//         src: "",
-//         credit: ""
-//       },
-//     }
-//   },
+  {
+    name: "London",
+    description: "London, the capital of England and the United Kingdom, is a 21st-century city with history stretching back to Roman times",
+    images: {
+      carousel: {
+        src: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1110&h=740&q=80",
+      },
+      icon: {
+        src: "https://images.unsplash.com/photo-1527259047647-731b8be6fd42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=90&h=90&q=80",
+      },
+      header: {
+        src: "https://images.unsplash.com/photo-1514729797186-944d57303199?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&q=80",
+      },
+    }
+  },
+];
 //   {
 //     name: "Gibraltar",
 //     description: "Gibraltar is a British Overseas Territory and headland, on Spain"s south coast.",
@@ -100,31 +98,31 @@ const cities = [
 //   },
 // ];
 //
-// const users = [
-//   {
-//     name: "Seanny Phoenix",
-//     email: "seannyphoenix@gmail.com",
-//     password: "$2b$10$b/19NiIVUPQID99p7YK62ugLD3skR0daNcVu4yGSz/4kw1yCCkQSS",
-//     plaintext: "testing123",
-//   },
-//   {
-//     name: "Sri Subramanian",
-//     email: "srirang97@gmail.com",
-//     password: "$2b$10$Xt9LeIQgvAaH2A1UH/20m.nCd/rmb/4HC0zJyhhXbpXFSGn030R6y",
-//     plaintext: "123coder",
-//   },
-//   {
-//     name: "Laura Sack",
-//     email: "lauragsack@gmail.com",
-//     password: "$2b$10$kwzbhqrPugfHMLBuslu39OiKs9CC1gD4pfVFQkcHWhUj9mpnqcsKu",
-//     plaintext: "dev01",
-//   },
-//   {
-//     name: "Jimmy Chen",
-//     email: "jimmychen.xin@gmail.com",
-//     password: "$2b$10$7m24zqpRGOsSYywIuRJAVujwmENHYnDx4Udv/vc8zUCGIR2zIVsy2",
-//     plaintext: "jimmy000",
-//   }
+const users = [
+  {
+    name: "Seanny Phoenix",
+    email: "seannyphoenix@gmail.com",
+    password: "$2b$10$b/19NiIVUPQID99p7YK62ugLD3skR0daNcVu4yGSz/4kw1yCCkQSS",
+    plaintext: "testing123",
+  },
+  {
+    name: "Sri Subramanian",
+    email: "srirang97@gmail.com",
+    password: "$2b$10$Xt9LeIQgvAaH2A1UH/20m.nCd/rmb/4HC0zJyhhXbpXFSGn030R6y",
+    plaintext: "123coder",
+  },
+  {
+    name: "Laura Sack",
+    email: "lauragsack@gmail.com",
+    password: "$2b$10$kwzbhqrPugfHMLBuslu39OiKs9CC1gD4pfVFQkcHWhUj9mpnqcsKu",
+    plaintext: "dev01",
+  },
+  {
+    name: "Jimmy Chen",
+    email: "jimmychen.xin@gmail.com",
+    password: "$2b$10$7m24zqpRGOsSYywIuRJAVujwmENHYnDx4Udv/vc8zUCGIR2zIVsy2",
+    plaintext: "jimmy000",
+  }
 ];
 
 const posts = [
