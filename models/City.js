@@ -1,10 +1,15 @@
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.ObjectId;
+const Image = require('./Image');
 
 const CitySchema = mongoose.Schema({
   name: String,
   description: String,
-  image: String,
+  images: {
+    carousel: Image.schema,
+    icon: Image.schema,
+    header: Image.schema,
+  },
   posts: [{
     type: ObjectId,
     ref: 'Post'
@@ -13,4 +18,4 @@ const CitySchema = mongoose.Schema({
 
 const City = mongoose.model('City', CitySchema);
 
-module.exports= City;
+module.exports = City;
