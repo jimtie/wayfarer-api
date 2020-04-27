@@ -10,10 +10,6 @@ router.get('/city/:id', ctrl.posts.cityPosts);
 // SHOW Post
 router.get('/:id', ctrl.posts.show);
 
-//SHOW All User Posts
-
-// router.get('/all', ctrl.posts.showUserPost);
-
 // CREATE Post
 router.post('/', ctrl.posts.create);
 

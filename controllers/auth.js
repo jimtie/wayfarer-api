@@ -99,7 +99,7 @@ async function verify(req,res){
  */
 async function logout(req, res){
   try{
-    if (authorized(req)){
+    if (!authorized(req)){
       utility.throw4xx(401);
     }
 
