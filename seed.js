@@ -288,6 +288,4 @@ async function seed(){
   }
 }
 
-
-
 seed();

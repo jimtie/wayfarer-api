@@ -30,9 +30,9 @@ async function show(req,res) {
  */
 async function create(req, res) {
   try {
-    // if (!auth.authorized(req)){
-    //   utility.throwAuthError();
-    // }
+    if (!auth.authorized(req)){
+      utility.throwAuthError();
+    }
 
     let data = req.body;
     data.user = req.session.currentUser.id;
