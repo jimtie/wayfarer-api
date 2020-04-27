@@ -143,5 +143,4 @@ module.exports = {
   deletePost,
   userPosts,
   cityPosts,
-  showUserPost,
 }
