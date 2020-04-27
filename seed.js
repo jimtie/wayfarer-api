@@ -33,7 +33,7 @@ const cities = [
         }
       },
       header: {
-        src: "https://images.unsplash.com/photo-1423347673683-ccdb7f6a948f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&q=80",
+        src: "https://images.unsplash.com/photo-1423347673683-ccdb7f6a948f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&h=250&q=80",
         credit: {
           name: "Jared Erondu",
           url: "https://unsplash.com/@erondu?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText",
@@ -63,7 +63,7 @@ const cities = [
         }
       },
       header: {
-        src: "https://images.unsplash.com/photo-1514729797186-944d57303199?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&q=80",
+        src: "https://images.unsplash.com/photo-1514729797186-944d57303199?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&h=250&q=80",
         credit: {
           name: "Jamie Davies",
           url: "https://unsplash.com/@chollz?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText",
@@ -93,7 +93,7 @@ const cities = [
         }
       },
       header: {
-        src: "https://images.unsplash.com/photo-1556715077-6779e7b5a75f?ixlib=rb-1.2.1&auto=format&fit=crop&w=375&q=80",
+        src: "https://images.unsplash.com/photo-1556715077-6779e7b5a75f?ixlib=rb-1.2.1&auto=format&fit=crop&w=375&h=250&q=80",
         credit: {
           name: "Fernando Paredes Murillo",
           url: "https://unsplash.com/@fernandoparedes?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText",
@@ -123,7 +123,7 @@ const cities = [
         }
       },
       header: {
-        src: "https://images.unsplash.com/photo-1561488111-5d800fd56b8a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&q=80",
+        src: "https://images.unsplash.com/photo-1561488111-5d800fd56b8a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&h=250&q=80",
         credit: {
           name: "Clement Felize",
           url: "https://unsplash.com/@centelm?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyTexts",
@@ -153,7 +153,7 @@ const cities = [
         }
       },
       header: {
-        src: "https://images.unsplash.com/photo-1478391679764-b2d8b3cd1e94?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&q=80",
+        src: "https://images.unsplash.com/photo-1478391679764-b2d8b3cd1e94?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=375&h=250&q=80",
         credit: {
           name: "Pedro Lastra",
           url: "https://unsplash.com/@peterlaster?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText",
