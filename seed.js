@@ -193,14 +193,14 @@ const users = [
 
 const posts = [
   {
-    title: "Here is a post",
-    content: "I say some stuff",
+    title: "I love living here!",
+    content: "I live on the 28th floor of a tower on Rincon Hill, overlooking the bay. Out view includes the Bay Bridge, Yerba Buena Island, and the Port of Oakland. It's so cool watching the hugs ships coming and going!",
     user: "Seanny Phoenix",
     city: "San Francisco"
   },
   {
-    title: "Some fuckery here.",
-    content: "I'm just trying to survive, man.",
+    title: "It's so huge!",
+    content: "I went to visit the Eiffel Tower. Oh my gosh, I can't believe how tall it is! How did they build this?!",
     user: "Sri Subramanian",
     city: "Paris"
   },
@@ -226,6 +226,42 @@ const posts = [
     title: "Pass on Ghirardelli Square",
     content: "Total tourist trap, chocolate is nothing to write home about.",
     user: "Sri Subramanian",
+    city: "San Francisco"
+  },
+  {
+    title: "Bondi Beach",
+    content: "Bondi Beach is beautiful. Watch out for the jellyfish!",
+    user: "Jimmy Chen",
+    city: "Sydney"
+  },
+  {
+    title: "Sydney Opera House",
+    content: "Incredible architechture. Do a harbour cruise if for no other reason than to get grammable pics of it.",
+    user: "Sri Subramanian",
+    city: "Sydney"
+  },
+  {
+    title: "Rock of Gibraltar",
+    content: "Amazing natural reserve. Also known as 'the Rock'. You have to check out its labyrinthine network of tunnels.",
+    user: "Laura Sack",
+    city: "Gibraltar"
+  },
+  {
+    title: "Borough Market",
+    content: "My favorite place in London! Awesome market under the London Bridge. Must get the Polish cheese sandwich!!",
+    user: "Seanny Phoenix",
+    city: "London"
+  },
+  {
+    title: "The National Gallery",
+    content: "The National Gallery is free to visit! That means you can do one hall at a time and really enjoy the art without getting overloaded.",
+    user: "Seanny Phoenix",
+    city: "London"
+  },
+  {
+    title: "Bobs Donuts on Baker",
+    content: "If you love donuts, make going to Bobs a priority. The new location on Baker is the refined little sister of the original on Polk.",
+    user: "Laura Sack",
     city: "San Francisco"
   },
 ];
