@@ -123,7 +123,6 @@ async function userPosts(req, res){
 // INDEX City Posts
 async function cityPosts(req, res){
   try{
-
     let posts = await db.Post.find({
       city: req.params.id
     }).populate('city', 'name').populate('user', 'name');

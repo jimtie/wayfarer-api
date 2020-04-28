@@ -193,14 +193,14 @@ const users = [
 
 const posts = [
   {
-    title: "Here is a post",
-    content: "I say some stuff",
+    title: "I love living here!",
+    content: "I live on the 28th floor of a tower on Rincon Hill, overlooking the bay. Out view includes the Bay Bridge, Yerba Buena Island, and the Port of Oakland. It's so cool watching the hugs ships coming and going!",
     user: "Seanny Phoenix",
     city: "San Francisco"
   },
   {
-    title: "Some fuckery here.",
-    content: "I'm just trying to survive, man.",
+    title: "It's so huge!",
+    content: "I went to visit the Eiffel Tower. Oh my gosh, I can't believe how tall it is! How did they build this?!",
     user: "Sri Subramanian",
     city: "Paris"
   },

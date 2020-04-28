@@ -23,6 +23,9 @@ function handleError(err, res) {
   console.log(err);
   console.log('----------');
 
+  if (!err.number) {
+    err.number = 500;
+  }
   res.status(err.number).json({
     status: err.number,
     message: err.message,
@@ -51,9 +54,14 @@ function clientUser(user){
   return clientUser;
 }
 
+function serverLog(message){
+  console.log('#\n#\n', message, '\n#\n#\n');
+}
+
 module.exports = {
   throw4xx,
   throwAuthError,
   handleError,
-  clientUser
+  clientUser,
+  serverLog
 }
