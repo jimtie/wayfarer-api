@@ -1,3 +1,5 @@
+const mongoose = require('mongoose')
+const ObjectId = mongoose.Types.ObjectId;
 const db = require('../models');
 const auth = require('./auth');
 const utility = require('../utility');
@@ -34,11 +36,17 @@ async function create(req, res) {
     //   utility.throwAuthError();
     // }
 
-    let data = req.body;
-    data.user = req.session.currentUser.id;
-    let newPost = await db.Post.create(data);
+    let post = req.body;
+    post.user = req.session.currentUser.id;
 
-    let foundCity = await db.City.findById(req.body.city);
+    post.city = ObjectId(post.city);
+    console.log(post);
+
+    let foundCity = await db.City.findById(post.city);
+    post.city = foundCity._id;
+
+    let newPost = await db.Post.create(post);
+
     foundCity.posts.push(newPost._id);
     let savedCity = await foundCity.save();
     res.json(newPost);
