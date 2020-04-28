@@ -228,6 +228,42 @@ const posts = [
     user: "Sri Subramanian",
     city: "San Francisco"
   },
+  {
+    title: "Bondi Beach",
+    content: "Bondi Beach is beautiful. Watch out for the jellyfish!",
+    user: "Jimmy Chen",
+    city: "Sydney"
+  },
+  {
+    title: "Sydney Opera House",
+    content: "Incredible architechture. Do a harbour cruise if for no other reason than to get grammable pics of it.",
+    user: "Sri Subramanian",
+    city: "Sydney"
+  },
+  {
+    title: "Rock of Gibraltar",
+    content: "Amazing natural reserve. Also known as 'the Rock'. You have to check out its labyrinthine network of tunnels.",
+    user: "Laura Sack",
+    city: "Gibraltar"
+  },
+  {
+    title: "Borough Market",
+    content: "My favorite place in London! Awesome market under the London Bridge. Must get the Polish cheese sandwich!!",
+    user: "Seanny Phoenix",
+    city: "London"
+  },
+  {
+    title: "The National Gallery",
+    content: "The National Gallery is free to visit! That means you can do one hall at a time and really enjoy the art without getting overloaded.",
+    user: "Seanny Phoenix",
+    city: "London"
+  },
+  {
+    title: "Bobs Donuts on Baker",
+    content: "If you love donuts, make going to Bobs a priority. The new location on Baker is the refined little sister of the original on Polk.",
+    user: "Laura Sack",
+    city: "San Francisco"
+  },
 ];
 
 async function seed(){
