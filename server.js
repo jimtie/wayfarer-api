@@ -53,9 +53,7 @@ app.use('/api/v1/cities', routes.cities);
 app.use('/api/v1/posts', routes.posts);
 app.use('/api/v1/users', routes.users);
 
-app.listen(3001, () => {
-  return console.log(`Server connected at http://localhost:3001`)
-});
+app.listen(app.listen(process.env.PORT || 3001))
 
 function serverLog(data) {
   console.log('----------');
