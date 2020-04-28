@@ -11,7 +11,10 @@ const app = express();
 
 // CORS
 const corsOptions = {
-  origin: [`http://localhost:3000`],
+  origin: [
+    `https://localhost:3000`,
+    `https://wayfarer-sei09t1.herokuapp.com/`
+  ],
   credentials: true,
   optionsSuccessStatus: 200
 }
